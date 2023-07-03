@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product', function (Blueprint $table) {
+        Schema::create('address', function (Blueprint $table) {
             $table->uuid('id')->primary('id');
 
-            $table->string('name', 100);
-            $table->decimal('value', 10, 2);
-            $table->integer('amount');
-            $table->integer('stock');
-            $table->string('category', 40);
+            $table->string('street', 100);
+            $table->integer('number');
+            $table->string('destrict', 100);
+            $table->string('city', 100);
+            $table->string('complement', 255);
 
-            $table->uuid('seller_id');
-            $table->foreign('seller_id')->references('id')->on('users');
+            $table->uuid('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
         });
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('produto');
+        Schema::dropIfExists('endereco');
     }
 };
