@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
+use App\Services\CreateOrderService;
 use App\Services\CreateUserService;
 use App\Services\DeleteUserService;
+use App\Services\ProductService;
 use App\Services\RetrieveUserService;
 use App\Services\UpdateUserService;
 use Illuminate\Http\Request;
@@ -41,6 +43,24 @@ class UserController extends Controller
     {
         $retrieveUserService = new DeleteUserService();
         $retrieveUserService->delete($id);
+
+        return response()->json([], 204);
+    }
+
+    public function productFilterController(Request $request) {
+        $id = $request->query('id');
+        $name = $request->query('name');
+        $category = $request->query('category');
+
+        $productService = new ProductService();
+        $result = $productService->execute($id, $name, $category);
+        return response()->json($result, 200);
+    }
+
+    public function createOrder(Request $request)
+    {
+        $retrieveUserService = new CreateOrderService();
+        $retrieveUserService->execute($request->all());
 
         return response()->json([], 204);
     }

@@ -19,11 +19,10 @@ return new class extends Migration
             $table->string('destrict', 100);
             $table->string('city', 100);
             $table->string('complement', 255);
+            $table->string('zip_code', 8);
 
             $table->uuid('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-
-            $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('endereco');
+        Schema::dropIfExists('address');
     }
 };

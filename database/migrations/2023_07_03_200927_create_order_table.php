@@ -13,22 +13,11 @@ return new class extends Migration
     {
         Schema::create('order', function (Blueprint $table) {
             $table->uuid('id')->primary('id');
-            
-            $table->string('status', 30);
-            $table->string('name', 100);
-            $table->decimal('value', 10, 2);
-            $table->integer('amount');
-            $table->integer('stock');
-            $table->string('category', 40);
 
-            $table->uuid('seller_id');
-            $table->foreign('seller_id')->references('id')->on('users');
+            $table->string('status', 20);
 
             $table->uuid('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
-
-            $table->uuid('address_id');
-            $table->foreign('address_id')->references('id')->on('address');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
         });

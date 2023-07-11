@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 //criação do usuario
 Route::post('/users', [UserController::class, 'create']);
+Route::get('/products', [UserController::class, 'productFilterController']);
 
 Route::group([
     'prefix' => '/auth',
